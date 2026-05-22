@@ -148,6 +148,11 @@ app.use('/api/notifications', apiLimiter, notificationRoutes);
 app.use('/api/coupons', apiLimiter, require('./routes/couponRoutes'));
 app.use('/api/reservations', apiLimiter, require('./routes/reservationRoutes'));
 
+// Development seed route
+if (process.env.NODE_ENV === 'development') {
+    app.use('/api/seed', require('./routes/seedRoutes')); 
+}
+
 // Menu with file upload rate limiting
 app.use('/api/menu', uploadLimiter, fileUpload({
   createParentPath: true,
